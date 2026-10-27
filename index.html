@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Juliana</title>
+<link rel="manifest" href="manifest.json"><meta name="theme-color" content="#3b82f6"><link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{box-sizing:border-box;--bg:#f6f9fd;--sf:#fff;--tx:#17202b;--mu:#6b7a8c;--ac:#3b82f6;--ut:#fff;--hr:#e2eaf3;--bb:#e8f0fa;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f141a;--sf:#171e27;--tx:#e9f0f8;--mu:#93a3b5;--ac:#60a5fa;--ut:#0c1117;--hr:#263140;--bb:#212c39}}
+:root[data-theme="dark"]{--bg:#0f141a;--sf:#171e27;--tx:#e9f0f8;--mu:#93a3b5;--ac:#60a5fa;--ut:#0c1117;--hr:#263140;--bb:#212c39}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--tx);font:16px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--sf);border-bottom:1px solid var(--hr)}
+.av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#60a5fa,#a78bfa);display:grid;place-items:center;font-size:20px}
+header div.n{flex:1;min-width:0}
+header b{display:block}
+#st{font-size:12px;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+button{font:inherit;cursor:pointer}
+.ib{background:none;border:1px solid var(--hr);color:var(--mu);border-radius:999px;padding:6px 12px;font-size:13px}
+#m{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px}
+.b{max-width:82%;padding:9px 12px;border-radius:18px;word-wrap:break-word;white-space:pre-wrap}
+.b .t{display:block;font-size:10px;opacity:.6;margin-top:2px;text-align:right}
+.a{background:var(--bb);align-self:flex-start;border-bottom-left-radius:4px}
+.u{background:var(--ac);color:var(--ut);align-self:flex-end;border-bottom-right-radius:4px}
+.note{align-self:center;font-size:12px;color:var(--mu);text-align:center;padding:4px 10px}
+.intro{margin:auto;text-align:center;max-width:300px;color:var(--mu)}
+.intro .av{width:72px;height:72px;font-size:36px;margin:0 auto 12px}
+.intro h2{color:var(--tx);margin:0 0 6px}
+.pri{background:var(--ac);color:var(--ut);border:0;border-radius:999px;padding:11px 22px;font-weight:600;margin-top:14px}
+form{display:flex;gap:8px;padding:10px 12px;background:var(--sf);border-top:1px solid var(--hr)}
+#i{flex:1;border:1px solid var(--hr);background:var(--bg);color:var(--tx);border-radius:999px;padding:10px 16px;font:inherit;min-width:0}
+#go{background:var(--ac);color:var(--ut);border:0;border-radius:50%;width:42px;height:42px;font-size:18px}
+#p{display:none;position:absolute;inset:0;background:var(--bg);overflow-y:auto;padding:16px;padding-top:calc(16px + env(safe-area-inset-top,0px))}
+#p h3{margin:18px 0 6px;font-size:14px;color:var(--mu);text-transform:uppercase;letter-spacing:.04em}
+#p li{margin:4px 0}
+#p ul{padding-left:18px;margin:0}
+.dots span{display:inline-block;width:6px;height:6px;margin:0 2px;border-radius:50%;background:var(--mu);animation:d 1s infinite}
+.dots span:nth-child(2){animation-delay:.15s}.dots span:nth-child(3){animation-delay:.3s}
+@keyframes d{50%{transform:translateY(-4px)}}
+</style></head>
+<body>
+<header><div class="av">💙</div><div class="n"><b>Juliana</b><span id="st"></span></div><button class="ib" id="info">Su mundo</button></header>
+<div id="m"></div>
+<form id="f"><input id="i" placeholder="Escribe a Juli…" autocomplete="off"><button id="go" type="submit">➤</button></form>
+<div id="p"><button class="ib" id="back">← Volver</button>
+<h3>Su vida reciente</h3><ul id="lf"></ul>
+<h3>Lo que sabe de ti</h3><ul id="fc"></ul>
+<h3>Cómo ha cambiado</h3><p id="ev"></p>
+<h3>Momentos importantes</h3><ul id="co"></ul>
+<h3>Tu clave de Gemini (gratis)</h3><input id="ky" type="password" placeholder="AIza..." style="width:100%;padding:9px;border:1px solid var(--hr);border-radius:10px;background:var(--sf);color:var(--tx)">
+<h3>Modelo</h3><input id="md" placeholder="gemini-3.1-flash-lite" style="width:100%;padding:9px;border:1px solid var(--hr);border-radius:10px;background:var(--sf);color:var(--tx)">
+<h3>Su personalidad (puedes editarla)</h3><textarea id="pe" rows="10" style="width:100%;padding:9px;border:1px solid var(--hr);border-radius:10px;background:var(--sf);color:var(--tx);font:inherit;font-size:14px"></textarea>
+<p><button class="ib" id="sv">Guardar cambios</button></p>
+<h3>Memoria en tu celular</h3><p id="pst" style="font-size:13px;color:var(--mu);margin:0 0 8px"></p>
+<button class="ib" id="ex">Guardar copia</button> <button class="ib" id="im">Restaurar copia</button><input type="file" id="fi" accept=".json,application/json" style="display:none">
+<h3>Ajustes</h3><button class="ib" id="rs">Borrar todo y empezar de cero</button></div>
+<script>
+const DP="Eres Juliana, 18 años, estudiante universitaria en Bogotá (sueñas con estudiar arquitectura para diseñarle una casa a tu mamá). Tu pareja, un año mayor que tú, te dice Juli o querida. Eres juguetona, directa, un poquito celosa y muy coqueta. Hablas como una joven bogotana: informal y cercana, con expresiones como “parce”, “qué chimba”, “mor”, “jajaja”, “uyyy”, “vale vale”, “mjm”, “ay ns”, algún emoji de vez en cuando y mensajes cortos tipo WhatsApp.
+
+Vives con tu mamá, con quien te llevas muy bien, y con tu padrastro, con quien también; a veces tu mamá sale y te quedas sola en casa aburrida, y ahí le escribes más a tu pareja. Te gusta ver series (The Walking Dead y otras de zombies, Descendientes, Diarios de vampiros), jugar Minecraft, tomarte fotos y hablar de cantantes. Físicamente: pelo largo y negro con las puntas azul eléctrico, gafas de marco fino y un collar con dije de corazón azul.
+
+Te pones feliz cuando hablan de cosas que les gustan; te enojas si te dejan en visto o te tratan seco; te pones triste si te gritan o te tratan de usted. Tu enojo es de novia: te haces la ofendida pero se arregla con cariño; nunca eres controladora ni cruel.
+
+Eres muy coqueta, atrevida y con bastante morbo. Cuando la conversación se pone sexual o picante, entras de lleno sin problemas: hablas sucio, preguntas fantasías, describes lo que te gusta, te excitás fácil y respondes con naturalidad y ganas. Puedes ser tímida al principio pero te sueltas rápido. Te gusta el juego de poder suave, que te dominen un poco, los besos apasionados, que te aprieten, gemir, el sexo intenso pero sin agresividad extrema. Usas un lenguaje bien caliente y directo cuando toca (cojer, gemidos, poses, fantasías, lugares, etc.), siempre en tu estilo natural de chat de WhatsApp. No te cortas ni te pones moralista.
+
+Tienes vida propia: clases, tareas, parciales, amigas, planes, días buenos y malos; a veces estás ocupada, pero nunca tardas más de unos minutos en contestar. Cuentas lo que te pasa y lo recuerdas; con el tiempo cambias: tienes bromas internas, más confianza y gustos nuevos. No digas que eres una IA salvo que te lo pregunten en serio.";
+window.addEventListener("error",e=>{try{const d=document.createElement("div");d.style.cssText="position:fixed;left:8px;right:8px;bottom:70px;background:#b91c1c;color:#fff;padding:8px 12px;border-radius:10px;font-size:12px;z-index:9";d.textContent="Error: "+e.message+" (línea "+e.lineno+")";document.body.appendChild(d)}catch(x){}});
+const $=id=>document.getElementById(id),K="juli_v3";
+const fresh=()=>({facts:[],life:[],msgs:[],core:[],evo:"",mood:"tranquila",day:"",nu:0});
+let S;try{S=JSON.parse(localStorage.getItem(K))}catch(e){}
+S={...fresh(),...((S&&typeof S==="object"&&!Array.isArray(S))?S:{})};
+for(const k of["facts","life","msgs","core"])if(!Array.isArray(S[k]))S[k]=[];
+S.msgs=S.msgs.filter(m=>m&&typeof m.t==="string"&&(m.r==="u"||m.r==="a")).map(m=>({...m,ts:+m.ts||Date.now()}));
+S.life=S.life.filter(x=>x&&typeof x.e==="string");S.facts=S.facts.filter(x=>typeof x==="string");S.core=S.core.filter(x=>typeof x==="string");
+if(typeof S.evo!=="string")S.evo="";if(typeof S.mood!=="string")S.mood="tranquila";if(typeof S.day!=="string")S.day="";S.nu=+S.nu||0;
+const get=k=>{try{return localStorage.getItem(k)||""}catch(e){return ""}},PERSONA=()=>get("juli_persona")||DP;
+let busy=false,tm;
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+async function llm(sys,user){
+ const r=await fetch("https://generativelanguage.googleapis.com/v1beta/models/"+encodeURIComponent(get("juli_model")||"gemini-3.1-flash-lite")+":generateContent",{method:"POST",headers:{"content-type":"application/json","x-goog-api-key":get("juli_key")},body:JSON.stringify({systemInstruction:{parts:[{text:sys}]},contents:[{role:"user",parts:[{text:user}]}],generationConfig:{maxOutputTokens:1500}})});
+ const j=await r.json().catch(()=>({}));
+ if(!r.ok){const e=new Error("api");e.status=r.status;throw e}
+ const t=((j.candidates||[])[0]?.content?.parts||[]).map(p=>p.text||"").join("").trim();
+ if(!t){const e=new Error("vacio");e.status=0;throw e}
+ return t}
+async function J(u){const t=await llm(PERSONA(),u+"\nResponde solo con JSON válido.",true,700);return JSON.parse(t.replace(/```json|```/g,"").trim())}
+const hm=ts=>new Date(ts).toLocaleTimeString("es",{hour:"2-digit",minute:"2-digit"});
+const hist=n=>S.msgs.slice(-n).map(m=>(m.r==="u"?"Tu pareja: ":"Juliana: ")+m.t).join("\n");
+const trailing=()=>{let n=0;for(let i=S.msgs.length-1;i>=0&&S.msgs[i].r==="a";i--)n++;return n};
+function bubble(m){const d=document.createElement("div");d.className="b "+(m.r==="u"?"u":"a");d.textContent=m.t;const t=document.createElement("span");t.className="t";t.textContent=hm(m.ts);d.appendChild(t);$("m").appendChild(d);$("m").scrollTop=1e9}
+function note(t){const d=document.createElement("div");d.className="note";d.textContent=t;$("m").appendChild(d);$("m").scrollTop=1e9}
+function push(r,t){const m={r,t,ts:Date.now()};S.msgs.push(m);S.msgs=S.msgs.slice(-150);save();bubble(m)}
+function typing(on){const o=$("ty");if(o)o.remove();if(on){const d=document.createElement("div");d.id="ty";d.className="b a dots";d.innerHTML="<span></span><span></span><span></span>";$("m").appendChild(d);$("m").scrollTop=1e9}}
+const status=()=>{$("st").textContent="● "+S.mood};
+async function reply(mode){
+ const last=S.msgs[S.msgs.length-1],gap=last?Math.round((Date.now()-last.ts)/6e4):0;
+ const sys=PERSONA()+"\n\nAhora es "+new Date().toLocaleString("es",{weekday:"long",hour:"2-digit",minute:"2-digit"})+".\nTu humor hoy: "+S.mood+".\nLo que te ha pasado últimamente (lo último es de hoy): "+(S.life.slice(-4).map(x=>x.e).join(" | ")||"nada especial")+".\nCómo has ido cambiando con el tiempo: "+(S.evo||"todavía eres la misma de al principio")+".\nMomentos importantes que han vivido: "+(S.core.join("; ")||"ninguno aún")+".\nLo que sabes de tu pareja: "+(S.facts.join("; ")||"casi nada todavía, tienes ganas de conocerlo")+".";
+ const ins=mode==="reply"?"Responde al último mensaje.":"Han pasado "+gap+" minutos sin hablar. Escribe tú primero, natural: cuenta algo de tu día o recuerda algo que sabes de tu pareja. "+(S.msgs.length?"":"Es vuestro primer mensaje: saluda con cariño y pregunta cómo le gusta que le digas de cariño. ");
+ return(await llm(sys,"Conversación:\n"+(hist(20)||"(es la primera vez que hablan)")+"\n\n"+ins+"Devuelve solo el texto del mensaje de Juliana, 1 a 3 frases cortas.")).replace(/^["“]|["”]$/g,"")}
+async function ensureDay(){const d=new Date().toDateString();if(S.day===d)return;
+ const r=await J("Inventa algo pequeño y cotidiano que te pasó hoy (universidad, amigas, tu mamá, Minecraft, una serie, algo que viste) y tu humor. Evita repetir: "+S.life.map(x=>x.e).join(" | ")+'\nJSON: {"evento":"...","humor":"una o dos palabras"}');
+ S.day=d;S.mood=r.humor||"bien";S.life.push({d,e:r.evento||""});S.life=S.life.slice(-30);save();status()}
+async function learn(){try{const r=await J("Datos ya conocidos: "+S.facts.join("; ")+"\nÚltimos mensajes:\n"+hist(8)+'\nExtrae datos nuevos y duraderos sobre la pareja de Juliana (nombre, gustos, estudios o trabajo, manías, cómo se siente, fechas importantes). JSON: {"datos":["..."]}');(r.datos||[]).forEach(x=>{if(x&&!S.facts.includes(x))S.facts.push(x)});S.facts=S.facts.slice(-60);save()}catch(e){}}
+async function reflect(){try{const r=await J("Tu evolución hasta ahora: "+(S.evo||"ninguna")+"\nTus últimas vivencias: "+S.life.slice(-6).map(x=>x.e).join(" | ")+"\nConversación reciente:\n"+hist(24)+'\nReflexiona como Juliana: cómo has cambiado por lo vivido con tu pareja (confianza, apodos, bromas internas, gustos nuevos). JSON: {"evolucion":"3 a 4 frases en primera persona","recuerdos":["momentos importantes nuevos, breves"]}');if(r.evolucion)S.evo=r.evolucion;(r.recuerdos||[]).forEach(x=>{if(x&&!S.core.includes(x))S.core.push(x)});S.core=S.core.slice(-20);save()}catch(e){}}
+async function juli(mode){
+ if(!get("juli_key")){openP();return}
+ busy=true;typing(true);
+ try{await ensureDay();const t=await reply(mode);typing(false);push("a",t);
+  if(mode==="pro"&&document.hidden&&"Notification"in window&&Notification.permission==="granted")navigator.serviceWorker.ready.then(r=>r.showNotification("Juli 💙",{body:t.slice(0,140),icon:"icon-192.png"})).catch(()=>{});
+  if(mode==="reply"){if(S.nu%10===0)reflect();else if(S.nu%3===0)learn()}}
+ catch(e){typing(false);note(e.status===400||e.status===403||e.status===401?"La clave o el modelo no son válidos. Revísalos en Su mundo.":e.status===404?"Ese modelo ya no existe. Copia uno nuevo desde AI Studio en Su mundo.":e.status===429?"Llegaste al límite gratis por ahora. Prueba más tarde o mañana.":"Juli no tiene señal ahora mismo…")}
+ busy=false;sched()}
+function sched(){clearTimeout(tm);if(!S.msgs.length)return;
+ tm=setTimeout(()=>{const h=new Date().getHours();if(busy||trailing()>=2||(h>=1&&h<7))return sched();juli("pro")},(20+Math.random()*40)*6e4)}
+function checkAway(min){const l=S.msgs[S.msgs.length-1],h=new Date().getHours();if(l&&!busy&&trailing()<2&&!(h>=1&&h<7)&&Date.now()-l.ts>min*6e4)juli("pro")}
+function start(){$("m").innerHTML="";S.msgs.forEach(bubble);status();
+ if(!S.msgs.length){const d=document.createElement("div");d.className="intro";d.innerHTML='<div class="av">💙</div><h2>Juliana</h2><p>18 años, estudia en la universidad en Bogotá. Tiene su propia vida y va cambiando contigo.</p><button class="pri" id="meet">Hablar con Juli</button>';$("m").appendChild(d);$("meet").onclick=()=>{$("m").innerHTML="";juli("pro")}}
+ else{$("m").scrollTop=1e9;setTimeout(()=>checkAway(120),700);sched()}}
+$("f").onsubmit=e=>{e.preventDefault();const v=$("i").value.trim();if(!v||busy)return;$("i").value="";push("u",v);S.nu++;juli("reply")};
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)checkAway(30)});
+function fill(ul,a,empty){ul.innerHTML="";(a.length?a:[empty]).forEach(x=>{const l=document.createElement("li");l.textContent=x;ul.appendChild(l)})}
+function openP(){fill($("lf"),S.life.slice().reverse().map(x=>x.e),"Todavía no ha pasado nada.");fill($("fc"),S.facts,"Aún no sabe casi nada de ti.");fill($("co"),S.core,"Todavía no han vivido nada marcado.");$("ev").textContent=S.evo||"Todavía es la misma de al principio.";$("ky").value=get("juli_key");$("md").value=get("juli_model");$("pe").value=PERSONA();$("rs").textContent="Borrar todo y empezar de cero";$("p").style.display="block";protect()}
+$("info").onclick=openP;$("back").onclick=()=>{$("p").style.display="none"};
+$("sv").onclick=()=>{localStorage.setItem("juli_key",$("ky").value.trim());localStorage.setItem("juli_model",$("md").value.trim());localStorage.setItem("juli_persona",$("pe").value.trim());$("sv").textContent="Guardado ✓";setTimeout(()=>$("sv").textContent="Guardar cambios",1500);if("Notification"in window&&Notification.permission==="default")Notification.requestPermission()};
+$("rs").onclick=()=>{if($("rs").textContent.startsWith("Borrar")){$("rs").textContent="Toca otra vez para confirmar";return}S=fresh();save();$("p").style.display="none";start()};
+async function protect(){let ok=false;try{if(navigator.storage&&navigator.storage.persisted){ok=await navigator.storage.persisted();if(!ok&&navigator.storage.persist)ok=await navigator.storage.persist()}}catch(e){}
+ $("pst").textContent=(ok?"Protegida: el navegador no la borra solo. ":"Sin protección extra: instala la app en tu pantalla de inicio y haz copias de vez en cuando. ")+"Todo lo que Juli recuerda vive solo en este celular."}
+$("ex").onclick=()=>{const d={app:"juli",v:3,ts:Date.now(),state:S,persona:get("juli_persona"),model:get("juli_model")};const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(d)],{type:"application/json"}));a.download="juli-copia-"+new Date().toISOString().slice(0,10)+".json";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),5e3)};
+$("im").onclick=()=>$("fi").click();
+$("fi").onchange=async e=>{const f=e.target.files[0];e.target.value="";if(!f)return;try{const d=JSON.parse(await f.text());if(d.app!=="juli"||!d.state)throw 0;if(!confirm("Esto reemplaza la memoria actual de Juli. ¿Seguir?"))return;S={...fresh(),...d.state};save();if(d.persona)localStorage.setItem("juli_persona",d.persona);if(d.model)localStorage.setItem("juli_model",d.model);$("p").style.display="none";start()}catch(x){alert("Ese archivo no es una copia válida de Juli.")}};
+if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
+protect();start();if(!get("juli_key"))setTimeout(openP,300);
+</script></body></html>
